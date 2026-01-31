@@ -9,7 +9,7 @@ export class BaseRepository<T extends Document> {
     }
 
     async findAll(
-        filter: mongoose.FilterQuery<T> = {},
+        filter: any = {},
         sort: any = { createdAt: -1 },
         skip: number = 0,
         limit: number = 10
@@ -17,11 +17,11 @@ export class BaseRepository<T extends Document> {
         return this.model.find(filter).sort(sort).skip(skip).limit(limit);
     }
 
-    async count(filter: mongoose.FilterQuery<T> = {}): Promise<number> {
+    async count(filter: any = {}): Promise<number> {
         return this.model.countDocuments(filter);
     }
 
-    async findOne(filter: mongoose.FilterQuery<T>): Promise<T | null> {
+    async findOne(filter: any): Promise<T | null> {
         return this.model.findOne(filter);
     }
 
