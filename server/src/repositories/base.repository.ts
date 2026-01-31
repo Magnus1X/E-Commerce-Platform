@@ -8,8 +8,17 @@ export class BaseRepository<T extends Document> {
         return createdItem.save();
     }
 
-    async findAll(filter: FilterQuery<T> = {}): Promise<T[]> {
-        return this.model.find(filter);
+    async findAll(
+        filter: FilterQuery<T> = {},
+        sort: any = { createdAt: -1 },
+        skip: number = 0,
+        limit: number = 10
+    ): Promise<T[]> {
+        return this.model.find(filter).sort(sort).skip(skip).limit(limit);
+    }
+
+    async count(filter: FilterQuery<T> = {}): Promise<number> {
+        return this.model.countDocuments(filter);
     }
 
     async findOne(filter: FilterQuery<T>): Promise<T | null> {
