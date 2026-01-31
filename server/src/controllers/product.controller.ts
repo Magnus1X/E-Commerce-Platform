@@ -28,7 +28,7 @@ export class ProductController {
 
     getById = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const product = await this.productService.getById(req.params.id);
+            const product = await this.productService.getById(req.params.id as string);
             if (!product) {
                 return res.status(404).json({ success: false, message: 'Product not found' });
             }
@@ -40,7 +40,7 @@ export class ProductController {
 
     update = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const product = await this.productService.update(req.params.id, req.body);
+            const product = await this.productService.update(req.params.id as string, req.body);
             if (!product) {
                 return res.status(404).json({ success: false, message: 'Product not found' });
             }
@@ -52,7 +52,7 @@ export class ProductController {
 
     delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const product = await this.productService.delete(req.params.id);
+            const product = await this.productService.delete(req.params.id as string);
             if (!product) {
                 return res.status(404).json({ success: false, message: 'Product not found' });
             }
