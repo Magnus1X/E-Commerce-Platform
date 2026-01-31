@@ -1,4 +1,4 @@
-import { Model, Document, UpdateQuery, FilterQuery } from 'mongoose';
+import mongoose, { Model, Document, UpdateQuery } from 'mongoose';
 
 export class BaseRepository<T extends Document> {
     constructor(protected readonly model: Model<T>) { }
@@ -9,7 +9,7 @@ export class BaseRepository<T extends Document> {
     }
 
     async findAll(
-        filter: FilterQuery<T> = {},
+        filter: mongoose.FilterQuery<T> = {},
         sort: any = { createdAt: -1 },
         skip: number = 0,
         limit: number = 10
@@ -17,11 +17,11 @@ export class BaseRepository<T extends Document> {
         return this.model.find(filter).sort(sort).skip(skip).limit(limit);
     }
 
-    async count(filter: FilterQuery<T> = {}): Promise<number> {
+    async count(filter: mongoose.FilterQuery<T> = {}): Promise<number> {
         return this.model.countDocuments(filter);
     }
 
-    async findOne(filter: FilterQuery<T>): Promise<T | null> {
+    async findOne(filter: mongoose.FilterQuery<T>): Promise<T | null> {
         return this.model.findOne(filter);
     }
 
